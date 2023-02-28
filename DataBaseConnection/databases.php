@@ -33,24 +33,36 @@ if(!$result) {
     <title>Mysql connection</title>
 </head>
 <body>
+
     <?php
 //use returned data if any
 // while there is data you can assign it to row variable loop
   while($student = mysqli_fetch_assoc($result)){
     //output dta from each row
     // var_dump($row);
-    echo $student["id"] . "<br>";
-    echo $student["name"] . "<br>";
-    echo $student["address"] . "<br>";
-    echo $student["contact"] . "<br>";
-    echo " <hr> ";
-  }
+    echo "<p><strong>id: </strong>" . $student["id"] . "</p>";
+    echo "<p><strong>name: </strong>" . $student["name"] . "</p>";
+    echo "<p><strong>address: </strong>" . $student["address"] . "</p>";
+    echo "<p><strong>contact: </strong>" . $student["contact"] . "</p>";
+    
+
 ?>
+<form style="display:inline-table" action="update_form.php" method="POST">
+  <input type="hidden" name="id" value="<?php echo $student["id"] ?>">
+  <input type="submit" value="update">
+</form>
+<form style="display:inline-table" action="databases_delete.php" method="POST">
+  <input type="hidden" name="id" value="<?php echo $student["id"] ?>">
+  <input type="submit" value="delete">
+</form>
+  <?php echo " <hr> "; } ?>
+
 
 <?php 
 //Release returned data
 mysqli_free_result($result);
 ?>
+
 </body>
 </html>
 <?php 
